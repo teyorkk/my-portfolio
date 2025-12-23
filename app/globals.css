@@ -201,3 +201,23 @@
     }
   }
 }
+
+/* Mobile nav + icon animations */
+@keyframes dropdownSlideFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-dropdown-animate {
+  animation: dropdownSlideFade 200ms ease-out;
+}
+
+.icon-toggle {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
