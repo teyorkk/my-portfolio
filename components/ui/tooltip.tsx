@@ -11,6 +11,7 @@ interface TooltipProps {
 export function Tooltip({ children, content }: TooltipProps) {
   const [isVisible, setIsVisible] = React.useState(false)
   const [align, setAlign] = React.useState<"center" | "left" | "right">("center")
+  const [arrowStyle, setArrowStyle] = React.useState<React.CSSProperties>({})
   const triggerRef = React.useRef<HTMLDivElement>(null)
 
   React.useLayoutEffect(() => {
@@ -18,16 +19,20 @@ export function Tooltip({ children, content }: TooltipProps) {
       const rect = triggerRef.current.getBoundingClientRect()
       const center = rect.left + rect.width / 2
       const windowWidth = window.innerWidth
+      const width = rect.width
       
       // If center is in the left 150px, align left
       if (center < 150) {
         setAlign("left")
+        setArrowStyle({ left: `${width / 2}px`, transform: "translateX(-50%)" })
       } 
       // If center is in the right 150px, align right
       else if (windowWidth - center < 150) {
         setAlign("right")
+        setArrowStyle({ right: `${width / 2}px`, transform: "translateX(50%)" })
       } else {
         setAlign("center")
+        setArrowStyle({ left: "50%", transform: "translateX(-50%)" })
       }
     }
   }, [isVisible])
@@ -37,16 +42,6 @@ export function Tooltip({ children, content }: TooltipProps) {
       case "left": return "left-0"
       case "right": return "right-0"
       default: return "left-1/2 -translate-x-1/2"
-    }
-  }
-
-  const getArrowStyle = () => {
-    if (!triggerRef.current) return {}
-    const width = triggerRef.current.offsetWidth
-    switch (align) {
-      case "left": return { left: `${width / 2}px`, transform: "translateX(-50%)" }
-      case "right": return { right: `${width / 2}px`, transform: "translateX(50%)" }
-      default: return { left: "50%", transform: "translateX(-50%)" }
     }
   }
 
@@ -70,7 +65,7 @@ export function Tooltip({ children, content }: TooltipProps) {
             {content}
             <div 
               className="absolute top-full -mt-1 border-4 border-transparent border-t-primary" 
-              style={getArrowStyle()}
+              style={arrowStyle}
             />
           </motion.div>
         )}

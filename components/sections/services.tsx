@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import servicesData from "@/app/data/services.json"
 import { Code, Globe, Laptop, Layout, Smartphone, Database } from "lucide-react"
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ElementType> = {
   Globe,
   Smartphone,
   Layout,

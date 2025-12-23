@@ -42,12 +42,7 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    // Basic implementation without Radix Slot if not installed yet, but usually we want it.
-    // For now, I'll stick to basic element if Slot isn't strictly needed or just use standard element
-    // wait I didn't install @radix-ui/react-slot. I should use standard button for now or add it.
-    // I'll skip Slot for simplicity to avoid extra deps unless requested, or just use 'span' logic if needed.
-    // Actually simpler: just standard button.
-    const Comp = "button"
+    const Comp = asChild ? Slot : "button"
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

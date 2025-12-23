@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { ArrowRight, Download } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function Hero() {
   return (
@@ -20,8 +20,7 @@ export function Hero() {
         >
           <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden border-4 border-primary/20 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground">
-                   {/* Replace with actual image */}
-                   <img src="me.jpg" alt="Profile" className="object-cover w-full h-full" />
+                   <Image src="/me.jpg" alt="Profile" fill className="object-cover" />
               </div>
           </div>
         </motion.div>
@@ -38,7 +37,7 @@ export function Hero() {
             Available for Freelance Work
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
-            Hi, I'm <span className="text-primary">Moises</span>
+            Hi, I&apos;m <span className="text-primary">Moises</span>
             <br />
             Web Developer
           </h1>

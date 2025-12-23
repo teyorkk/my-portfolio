@@ -10,7 +10,13 @@ import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri"
 import { BiLogoPostgresql } from "react-icons/bi"
 import { VscVscode } from "react-icons/vsc"
 
-const iconMap: Record<string, any> = {
+interface SkillItem {
+  name: string;
+  icon: string;
+  description: string;
+}
+
+const iconMap: Record<string, React.ElementType> = {
   FaHtml5, FaCss3Alt, IoLogoJavascript, SiTypescript, FaReact, RiNextjsFill, RiTailwindCssFill,
   SiSupabase, BiLogoPostgresql, SiMysql,
   FaGitAlt, FaGithub, VscVscode, SiVercel, 
@@ -18,7 +24,7 @@ const iconMap: Record<string, any> = {
 }
 
 export function Skills() {
-  const skills = skillsData;
+  const skills = skillsData as Record<string, SkillItem[]>;
   return (
     <section id="skills" className="py-20 bg-background/50">
       <div className="container mx-auto px-4 md:px-6">
@@ -45,7 +51,7 @@ export function Skills() {
                 {category}
               </h3>
               <div className="flex flex-wrap gap-6 justify-center md:justify-start">
-                {items.map((skill: any, index: number) => {
+                {items.map((skill: SkillItem, index: number) => {
                   const Icon = iconMap[skill.icon] || FaHtml5;
                   return (
                     <Tooltip key={skill.name} content={skill.description}>
