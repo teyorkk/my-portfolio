@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Web Development",
+    "description": "Building fast, responsive, and SEO-friendly websites using modern frameworks.",
+    "icon": "Globe"
+  },
+  {
+    "title": "Mobile App Development",
+    "description": "Creating cross-platform mobile applications that provide native-like performance.",
+    "icon": "Smartphone"
+  },
+  {
+    "title": "Frontend Development",
+    "description": "Expertise in React, Vue, and Angular to build interactive UIs.",
+    "icon": "Code"
+  },
+  {
+    "title": "Backend Development",
+    "description": "Robust server-side logic and API development using Node.js and Python.",
+    "icon": "Database"
+  },
+  {
+    "title": "Consulting",
+    "description": "Providing technical insights and strategies/solutions for your business.",
+    "icon": "Laptop"
+  }
+]

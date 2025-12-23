@@ -1,0 +1,25 @@
+{
+  "frontend": [
+    { "name": "HTML", "icon": "FaHtml5", "description": "Semantic markup structure" },
+    { "name": "CSS", "icon": "FaCss3Alt", "description": "Styling and layout design" },
+    { "name": "JavaScript", "icon": "IoLogoJavascript", "description": "Dynamic web interactions" },
+    { "name": "TypeScript", "icon": "SiTypescript", "description": "Type-safe development" },
+    { "name": "React", "icon": "FaReact", "description": "Component-based UI library" },
+    { "name": "Next.js", "icon": "RiNextjsFill", "description": "React Framework for Web" },
+    { "name": "Tailwind", "icon": "RiTailwindCssFill", "description": "Utility-first CSS framework" }
+  ],
+  "backend": [
+    { "name": "Next.js", "icon": "RiNextjsFill", "description": "Server-side rendering & API routes" },
+    { "name": "Supabase", "icon": "SiSupabase", "description": "Open source Firebase alternative" },
+    { "name": "PostgreSQL", "icon": "BiLogoPostgresql", "description": "Advanced relational database" },
+    { "name": "MySQL", "icon": "SiMysql", "description": "Open-source relational database" }
+  ],
+  "tools": [
+    { "name": "Git", "icon": "FaGitAlt", "description": "Version control" },
+    { "name": "GitHub", "icon": "FaGithub", "description": "Code hosting platform" },
+    { "name": "VS Code", "icon": "VscVscode", "description": "Code Editor" },
+    { "name": "Vercel", "icon": "SiVercel", "description": "Deployment Platform" },
+    { "name": "Claude AI", "icon": "SiAnthropic", "description": "AI Assistant" },
+    { "name": "n8n", "icon": "SiN8N", "description": "Workflow Automation" }
+  ]
+}

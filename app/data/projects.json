@@ -1,0 +1,51 @@
+[ {
+    "title": "IskolarBlock",
+    "description": "A blockchain-based scholarship management platform ensuring transparency and efficiency.",
+    "image": "/iskolarblock.png",
+    "link": "https://github.com/teyorkk/iskolarblock",
+    "tags": ["Next.js", "n8n", "Tailwind", "Supabase", "PostgreSQL"]
+  },
+  {
+    "title": "My Portfolio Website",
+    "description": "A modern portfolio built with React and Tailwind CSS.",
+    "image": "/portfolio.png",
+    "link": "https://github.com/teyorkk/my-portfolio",
+    "tags": ["React","Next.js", "Tailwind"]
+  },
+  {
+    "title": "Trackify",
+    "description": "A mobile expense tracker app using Flutter.",
+    "image": "/trackify.png",
+    "link": "https://github.com/teyorkk/expense_tracker_flutter",
+    "tags": ["Flutter", "SQLite"]
+  },
+  {
+    "title": "Cineverse",
+    "description": "A movie review logging website using PHP.",
+    "image": "/cineverse.png",
+    "link": "https://github.com/teyorkk/cineverse",
+    "tags": ["MySQL", "PHP"]
+  },
+  {
+    "title": "SocMedSS",
+    "description": "A social media app built with Kotlin and Firebase.",
+    "image": "/socmedss.png",
+    "link": "https://github.com/teyorkk/socmedss",
+    "tags": ["Kotlin", "Firebase"]
+  },
+  {
+    "title": "CineMood",
+    "description": "A mood-based movie recommendation website built with Next.js and n8n automation.",
+    "image": "/cinemood.png",
+    "link": "https://github.com/teyorkk/cinemood",
+    "tags": ["Next.js", "n8n", "Tailwind"]
+  },
+  {
+    "title": "La La Land",
+    "description": "An informative Progressive Web App (PWA) for the movie La La Land.",
+    "image": "/lalaland.png",
+    "link": "https://github.com/teyorkk/lalaland",
+    "tags": ["Next.js", "Tailwind"]
+  }
+ 
+]

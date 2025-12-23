@@ -1,0 +1,70 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { ArrowRight, Download } from "lucide-react"
+import Link from "next/link"
+
+export function Hero() {
+  return (
+    <section className="min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16 md:pt-0">
+      <div className="container px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center z-10 mx-auto">
+        
+        {/* Image on Left Side */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center lg:justify-end order-1 w-full"
+        >
+          <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden border-4 border-primary/20 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground">
+                   {/* Replace with actual image */}
+                   <img src="me.jpg" alt="Profile" className="object-cover w-full h-full" />
+              </div>
+          </div>
+        </motion.div>
+
+        {/* Text on Right Side */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-6 text-center lg:text-left order-2"
+        >
+          <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+            Available for Freelance Work
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
+            Hi, I'm <span className="text-primary">Moises</span>
+            <br />
+            Web Developer
+          </h1>
+          <p className="mx-auto lg:mx-0 max-w-[700px] text-muted-foreground text-lg md:text-xl">
+            I build accessible, pixel-perfect, performant, and premium web experiences.
+            Specialized in React, Next.js, and Modern UI.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <Button size="lg" className="rounded-full bg-gradient-to-r from-primary to-green-500 hover:from-primary/90 hover:to-green-500/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:scale-105" asChild>
+              <Link href="#contact">
+                Hire Me
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="rounded-full border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary transition-all duration-300" asChild>
+              <Link href="#projects">
+                View Projects
+              </Link>
+            </Button>
+          </div>
+        </motion.div>
+
+      </div>
+      
+      {/* Background Gradient Effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] -z-10" />
+    </section>
+  )
+}

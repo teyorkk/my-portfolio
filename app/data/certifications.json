@@ -1,0 +1,30 @@
+[
+  {
+    "title": "ITS Device Configuration and Management",
+    "issuer": "Certiport",
+    "date": "2025",
+    "image": "/certs/its-device.png",
+    "link": "https://certiport.pearsonvue.com/Certifications/ITSpecialist/Certification/Overview"
+  },
+  {
+    "title": "ITS Cloud Computing",
+    "issuer": "Certiport",
+    "date": "2025",
+    "image": "/certs/its-cloud.png",
+    "link": "https://certiport.pearsonvue.com/Certifications/ITSpecialist/Certification/Overview"
+  },
+  {
+    "title": "Microsoft Access Expert",
+    "issuer": "Microsoft",
+    "date": "2025",
+    "image": "/certs/ms-access.png",
+    "link": "https://learn.microsoft.com/en-us/credentials/"
+  },
+  {
+    "title": "Microsoft Excel Associate",
+    "issuer": "Microsoft",
+    "date": "2023",
+    "image": "/certs/ms-excel.png",
+    "link": "https://learn.microsoft.com/en-us/credentials/"
+  }
+]
