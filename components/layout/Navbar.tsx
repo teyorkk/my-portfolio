@@ -42,7 +42,7 @@ export function Navbar() {
           href="/"
           className="flex items-center gap-2 font-bold text-xl group"
         >
-          <div className="relative h-12 w-12 transition-transform group-hover:scale-110">
+          <div className="relative h-30 w-40 transition-transform group-hover:scale-110">
             <Image
               src="/logo.svg"
               alt="Logo"

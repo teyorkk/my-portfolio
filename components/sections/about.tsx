@@ -10,7 +10,8 @@ export function About() {
             About Me
           </h2>
           <p className="max-w-[700px] text-muted-foreground md:text-lg">
-            A passionate developer with a keen eye for design.
+            A passionate developer and IT student from La Consolacion University
+            Philippines with a keen eye for design.
           </p>
         </div>
 
