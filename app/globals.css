@@ -109,19 +109,34 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground;
     /* Add subtle green tint radial gradient */
-    background-image: radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.05), transparent 60%);
+    background-image: radial-gradient(
+      circle at 50% 0%,
+      hsl(var(--primary) / 0.05),
+      transparent 60%
+    );
     background-attachment: fixed;
     overflow-x: hidden;
-    
+
     /* Firefox Scrollbar */
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--primary) / 0.5) hsl(var(--secondary));
   }
-  
+  main {
+    overflow-x: hidden;
+  }
+  main,
+  section {
+    width: 100%;
+  }
+  section {
+    overflow-x: clip;
+  }
+
   /* Custom Green Scrollbar */
   ::-webkit-scrollbar {
     width: 10px;

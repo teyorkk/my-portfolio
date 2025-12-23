@@ -1,9 +1,12 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 export function About() {
   return (
-    <section id="about" className="py-20 bg-secondary/30">
+    <section
+      id="about"
+      className="py-20 bg-secondary/30 scroll-mt-28 md:scroll-mt-32"
+    >
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,18 +35,23 @@ export function About() {
               Driven by curiosity, fueled by coffee.
             </h3>
             <p className="text-muted-foreground">
-              I am a web developer with extensive experience in building high-quality websites. My expertise lies in front-end development, where I specialize in React ecosystem. I love creating beautiful, accessible, and responsive interfaces that provide a great user experience.
+              I am a web developer with extensive experience in building
+              high-quality websites. My expertise lies in front-end development,
+              where I specialize in React ecosystem. I love creating beautiful,
+              accessible, and responsive interfaces that provide a great user
+              experience.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              When I&apos;m not coding, I&apos;m exploring new technologies, contributing to open source, or gaming.
+              When I&apos;m not coding, I&apos;m exploring new technologies,
+              contributing to open source, or gaming.
             </p>
-            
+
             <div className="pt-8 flex justify-center">
-               <div className="h-2 w-32 bg-gradient-to-r from-primary/50 to-primary rounded-full" />
+              <div className="h-2 w-32 bg-gradient-to-r from-primary/50 to-primary rounded-full" />
             </div>
           </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }

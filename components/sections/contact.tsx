@@ -140,7 +140,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-background relative">
+    <section id="contact" className="py-20 bg-background relative scroll-mt-28 md:scroll-mt-32">
       <CustomDialog 
         isOpen={dialogState.isOpen} 
         onClose={closeDialog} 

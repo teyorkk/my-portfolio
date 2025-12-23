@@ -12,7 +12,7 @@ import projectsData from "@/app/data/projects.json"
 export function Projects() {
   const projects = projectsData;
   return (
-    <section id="projects" className="py-20 bg-secondary/30">
+    <section id="projects" className="py-20 bg-secondary/30 scroll-mt-28 md:scroll-mt-32">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

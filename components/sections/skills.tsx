@@ -26,7 +26,7 @@ const iconMap: Record<string, React.ElementType> = {
 export function Skills() {
   const skills = skillsData as Record<string, SkillItem[]>;
   return (
-    <section id="skills" className="py-20 bg-background/50">
+    <section id="skills" className="py-20 bg-background/50 scroll-mt-28 md:scroll-mt-32">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

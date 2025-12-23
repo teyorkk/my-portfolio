@@ -8,7 +8,7 @@ import Image from "next/image"
 export function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center overflow-hidden bg-background pt-16 md:pt-0">
-      <div className="container px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center z-10 mx-auto">
+      <div className="container max-w-screen-xl px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center z-10 mx-auto">
         
         {/* Image on Left Side */}
         <motion.div
@@ -18,7 +18,7 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="flex justify-center lg:justify-end order-1 w-full"
         >
-          <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden border-4 border-primary/20 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+          <div className="relative w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden border-4 border-primary/20 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground">
                    <Image src="/me.jpg" alt="Profile" fill className="object-cover" />
               </div>
@@ -46,7 +46,7 @@ export function Hero() {
             Specialized in React, Next.js, and Modern UI.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 md:mb-0">
             <Button size="lg" className="rounded-full bg-gradient-to-r from-primary to-green-500 hover:from-primary/90 hover:to-green-500/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:scale-105" asChild>
               <Link href="#contact">
                 Hire Me
@@ -63,7 +63,7 @@ export function Hero() {
       </div>
       
       {/* Background Gradient Effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[500px] md:h-[500px] max-w-[90vw] bg-primary/20 rounded-full blur-[100px] -z-10 pointer-events-none" />
     </section>
   )
 }
