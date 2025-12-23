@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 export function About() {
   return (
     <section
@@ -8,29 +5,17 @@ export function About() {
       className="py-20 bg-secondary/30 scroll-mt-28 md:scroll-mt-32"
     >
       <div className="container mx-auto px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center text-center space-y-4 mb-12"
-        >
+        <div className="flex flex-col items-center text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
             About Me
           </h2>
           <p className="max-w-[700px] text-muted-foreground md:text-lg">
-            A passionate developer wih a keen eye for design.
+            A passionate developer with a keen eye for design.
           </p>
-        </motion.div>
+        </div>
 
         <div className="flex justify-center items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-6 text-center max-w-3xl"
-          >
+          <div className="space-y-6 text-center max-w-3xl">
             <h3 className="text-2xl font-bold">
               Driven by curiosity, fueled by coffee.
             </h3>
@@ -49,7 +34,7 @@ export function About() {
             <div className="pt-8 flex justify-center">
               <div className="h-2 w-32 bg-gradient-to-r from-primary/50 to-primary rounded-full" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,4 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,33 +7,21 @@ export function Hero() {
     <section className="min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20 md:pt-5">
       <div className="container max-w-screen-xl px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center z-10 mx-auto">
         {/* Image on Left Side */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5 }}
-          className="flex justify-center lg:justify-end order-1 w-full"
-        >
+        <div className="flex justify-center lg:justify-end order-1 w-full animate-fade-in-left">
           <div className="relative w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden border-4 border-primary/20 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-            <div className="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground">
-              <Image
-                src="/me.jpg"
-                alt="Profile"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <Image
+              src="/me.jpg"
+              alt="Profile"
+              fill
+              priority
+              sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 400px"
+              className="object-cover"
+            />
           </div>
-        </motion.div>
+        </div>
 
         {/* Text on Right Side */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="space-y-6 text-center lg:text-left order-2"
-        >
+        <div className="space-y-6 text-center lg:text-left order-2 animate-fade-in-right">
           <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
             Available for Freelance Work
           </div>
@@ -67,7 +52,7 @@ export function Hero() {
               <Link href="#projects">View Projects</Link>
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Background Gradient Effect */}
