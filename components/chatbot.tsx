@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { Send, X, MessageCircle, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { useState, useRef, useEffect } from "react";
+import { Send, X, MessageCircle, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 interface Message {
-  role: 'user' | 'model';
+  role: "user" | "model";
   parts: { text: string }[];
 }
 
 interface ChatMessage {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 }
 
@@ -20,16 +20,17 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      role: 'assistant',
-      content: "Hi! I'm your AI assistant. How can I help you learn more about this portfolio?",
+      role: "assistant",
+      content:
+        "Hi! I'm your AI assistant. How can I help you learn more about this portfolio?",
     },
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -40,8 +41,8 @@ export default function Chatbot() {
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
-    setInput('');
-    setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
+    setInput("");
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
     try {
@@ -49,14 +50,14 @@ export default function Chatbot() {
       const history: Message[] = messages
         .slice(1) // Skip the initial assistant greeting
         .map((msg) => ({
-          role: msg.role === 'assistant' ? 'model' : 'user',
+          role: msg.role === "assistant" ? "model" : "user",
           parts: [{ text: msg.content }],
         }));
 
-      const response = await fetch('/api/chat', {
-        method: 'POST',
+      const response = await fetch("/api/chat", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           message: userMessage,
@@ -65,21 +66,21 @@ export default function Chatbot() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response');
+        throw new Error("Failed to get response");
       }
 
       const data = await response.json();
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: data.response },
+        { role: "assistant", content: data.response },
       ]);
     } catch (error) {
-      console.error('Chat error:', error);
+      console.error("Chat error:", error);
       setMessages((prev) => [
         ...prev,
         {
-          role: 'assistant',
-          content: 'Sorry, I encountered an error. Please try again.',
+          role: "assistant",
+          content: "Sorry, I encountered an error. Please try again.",
         },
       ]);
     } finally {
@@ -88,7 +89,7 @@ export default function Chatbot() {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
@@ -126,28 +127,30 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 space-y-4 overflow-y-auto p-4">
+          <div className="flex-1 space-y-4 overflow-y-auto p-4 text-foreground">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`flex ${
-                  message.role === 'user' ? 'justify-end' : 'justify-start'
+                  message.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 <div
                   className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                    message.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground'
+                    message.role === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary border border-border text-foreground"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  <p className="text-sm whitespace-pre-wrap">
+                    {message.content}
+                  </p>
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="flex items-center gap-2 rounded-lg bg-muted px-4 py-2">
+                <div className="flex items-center gap-2 rounded-lg bg-secondary border border-border text-foreground px-4 py-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
                   <p className="text-sm">Thinking...</p>
                 </div>
