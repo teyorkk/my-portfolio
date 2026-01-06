@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import Chatbot from "@/components/chatbot";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -43,6 +44,7 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
+          <Chatbot />
         </ThemeProvider>
       </body>
     </html>
