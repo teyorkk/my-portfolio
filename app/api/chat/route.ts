@@ -15,6 +15,45 @@ interface ChatRequest {
   history?: Message[];
 }
 
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  tags: string[];
+}
+
+interface GitHubContent {
+  type: string;
+  encoding?: string;
+  content?: string;
+  name?: string;
+}
+
+interface GitHubRepo {
+  full_name: string;
+  description: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  created_at: string;
+  updated_at: string;
+  html_url: string;
+  homepage: string | null;
+}
+
+interface FunctionCall {
+  name: string;
+  args?: {
+    query?: string;
+    owner?: string;
+    repo?: string;
+    path?: string;
+    dataType?: string;
+    projectTitle?: string;
+  };
+}
+
 const SYSTEM_PROMPT = `You are a helpful AI assistant for Moises Theo Atienza's portfolio website. You represent Moises and should speak about him in a friendly, personal way.
 
 About Moises Theo:
@@ -26,6 +65,8 @@ About Moises Theo:
 - His interests include: cinema (he's driven by curiosity and fueled by his love for cinema), exploring new technologies, contributing to open source projects, and gaming
 - He is available for freelance work
 - He loves movies espcially La La Land
+- He loves especially Elliott Smith and Phoebe Bridgers.
+- His favorite album is Punisher by Phoebe Bridgers.
 - He builds accessible, pixel-perfect, performant, and premium web experiences
 
 Your role is to:
@@ -51,24 +92,19 @@ async function getPortfolioData(dataType: string): Promise<string> {
   try {
     const dataDir = join(process.cwd(), "app", "data");
     let filePath: string;
-    let fileName: string;
 
     switch (dataType.toLowerCase()) {
       case "projects":
         filePath = join(dataDir, "projects.json");
-        fileName = "projects";
         break;
       case "skills":
         filePath = join(dataDir, "skills.json");
-        fileName = "skills";
         break;
       case "certifications":
         filePath = join(dataDir, "certifications.json");
-        fileName = "certifications";
         break;
       case "services":
         filePath = join(dataDir, "services.json");
-        fileName = "services";
         break;
       default:
         return `Unknown data type: ${dataType}. Available types: projects, skills, certifications, services`;
@@ -90,15 +126,15 @@ async function getProjectReadme(projectTitle: string): Promise<string> {
     const dataDir = join(process.cwd(), "app", "data");
     const projectsPath = join(dataDir, "projects.json");
     const projectsContent = await readFile(projectsPath, "utf-8");
-    const projects = JSON.parse(projectsContent);
+    const projects: Project[] = JSON.parse(projectsContent);
 
     const project = projects.find(
-      (p: any) => p.title.toLowerCase() === projectTitle.toLowerCase()
+      (p: Project) => p.title.toLowerCase() === projectTitle.toLowerCase()
     );
 
     if (!project || !project.link) {
       return `Project "${projectTitle}" not found in portfolio. Available projects: ${projects
-        .map((p: any) => p.title)
+        .map((p: Project) => p.title)
         .join(", ")}`;
     }
 
@@ -143,16 +179,25 @@ async function getGitHubRepo(
       );
 
       if (contentResponse.ok) {
-        const content = await contentResponse.json();
-        if (content.type === "file" && content.encoding === "base64") {
+        const content: GitHubContent = await contentResponse.json();
+        if (
+          content.type === "file" &&
+          content.encoding === "base64" &&
+          content.content
+        ) {
           const fileContent = Buffer.from(content.content, "base64").toString(
             "utf-8"
           );
           return `File: ${path}\n\n${fileContent}`;
         } else if (content.type === "dir") {
-          const files = Array.isArray(content) ? content : [content];
+          const files: GitHubContent[] = Array.isArray(content)
+            ? content
+            : [content];
           const fileList = files
-            .map((file: any) => `- ${file.name} (${file.type})`)
+            .map(
+              (file: GitHubContent) =>
+                `- ${file.name || "unknown"} (${file.type})`
+            )
             .join("\n");
           return `Directory: ${path}\n\nFiles:\n${fileList}`;
         }
@@ -173,7 +218,7 @@ async function getGitHubRepo(
       throw new Error(`GitHub API error: ${repoResponse.status}`);
     }
 
-    const repoData = await repoResponse.json();
+    const repoData: GitHubRepo = await repoResponse.json();
 
     let result = `Repository: ${repoData.full_name}\n`;
     result += `Description: ${repoData.description || "No description"}\n`;
@@ -220,10 +265,6 @@ async function getGitHubRepo(
 
 async function searchWeb(query: string): Promise<string> {
   try {
-    const searchUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(
-      query
-    )}`;
-
     const response = await fetch(
       `https://api.duckduckgo.com/?q=${encodeURIComponent(
         query
@@ -248,17 +289,34 @@ async function searchWeb(query: string): Promise<string> {
       results += data.AbstractText + "\n\n";
     }
 
-    if (data.RelatedTopics && data.RelatedTopics.length > 0) {
-      results += "Related information:\n";
-      data.RelatedTopics.slice(0, 3).forEach((topic: any, index: number) => {
-        if (topic.Text) {
-          results += `${index + 1}. ${topic.Text}\n`;
-        }
-      });
+    interface DuckDuckGoTopic {
+      Text?: string;
     }
 
-    if (data.Answer) {
-      results = data.Answer + "\n\n" + results;
+    interface DuckDuckGoResponse {
+      AbstractText?: string;
+      RelatedTopics?: DuckDuckGoTopic[];
+      Answer?: string;
+    }
+
+    const duckDuckGoData = data as DuckDuckGoResponse;
+
+    if (
+      duckDuckGoData.RelatedTopics &&
+      duckDuckGoData.RelatedTopics.length > 0
+    ) {
+      results += "Related information:\n";
+      duckDuckGoData.RelatedTopics.slice(0, 3).forEach(
+        (topic: DuckDuckGoTopic, index: number) => {
+          if (topic.Text) {
+            results += `${index + 1}. ${topic.Text}\n`;
+          }
+        }
+      );
+    }
+
+    if (duckDuckGoData.Answer) {
+      results = duckDuckGoData.Answer + "\n\n" + results;
     }
 
     return (
@@ -302,6 +360,7 @@ export async function POST(request: NextRequest) {
                   },
                 },
                 required: ["query"],
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any,
             },
             {
@@ -328,6 +387,7 @@ export async function POST(request: NextRequest) {
                   },
                 },
                 required: ["owner", "repo"],
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any,
             },
             {
@@ -345,6 +405,7 @@ export async function POST(request: NextRequest) {
                   },
                 },
                 required: ["dataType"],
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any,
             },
             {
@@ -361,6 +422,7 @@ export async function POST(request: NextRequest) {
                   },
                 },
                 required: ["projectTitle"],
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any,
             },
           ],
@@ -389,7 +451,7 @@ export async function POST(request: NextRequest) {
     const functionCalls = response.functionCalls();
     if (functionCalls && functionCalls.length > 0) {
       const functionResponses = await Promise.all(
-        functionCalls.map(async (call: any) => {
+        functionCalls.map(async (call: FunctionCall) => {
           if (call.name === "search_web") {
             const query = call.args?.query || message;
             const searchResults = await searchWeb(query);
