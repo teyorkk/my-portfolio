@@ -23,7 +23,7 @@ export default function Chatbot() {
     {
       role: "assistant",
       content:
-        "Hi! I'm your AI assistant. How can I help you learn more about this portfolio?",
+        "Hey there! Welcome to Moises Theo's portfolio! I'm here to help you explore his projects, skills, and experience. Ask me anything about his work, check out his GitHub repos, or learn about his certifications. What would you like to know?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -99,19 +99,21 @@ export default function Chatbot() {
   return (
     <>
       {/* Chatbot Toggle Button */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 rounded-full bg-primary text-primary-foreground p-4 shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-primary/90"
-          aria-label="Open chatbot"
-        >
-          <MessageCircle className="h-6 w-6" />
-        </button>
-      )}
+      <button
+        onClick={() => setIsOpen(true)}
+        className={`fixed bottom-6 right-6 z-50 rounded-full bg-primary text-primary-foreground p-4 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl hover:bg-primary/90 ${
+          isOpen
+            ? "opacity-0 scale-0 pointer-events-none"
+            : "opacity-100 scale-100"
+        }`}
+        aria-label="Open chatbot"
+      >
+        <MessageCircle className="h-6 w-6" />
+      </button>
 
       {/* Chatbot Window */}
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 z-50 flex h-[500px] w-[380px] flex-col overflow-hidden shadow-2xl">
+        <Card className="fixed bottom-6 right-6 z-50 flex h-[500px] w-[380px] flex-col overflow-hidden shadow-2xl chatbot-open">
           {/* Header */}
           <div className="flex items-center justify-between border-b bg-primary text-primary-foreground p-4">
             <div className="flex items-center gap-2">
