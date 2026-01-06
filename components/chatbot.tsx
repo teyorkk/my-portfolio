@@ -101,14 +101,14 @@ export default function Chatbot() {
       {/* Chatbot Toggle Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 rounded-full bg-primary text-primary-foreground p-4 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl hover:bg-primary/90 ${
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 rounded-full bg-primary text-primary-foreground p-3 sm:p-4 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl hover:bg-primary/90 ${
           isOpen
             ? "opacity-0 scale-0 pointer-events-none"
             : "opacity-100 scale-100"
         }`}
         aria-label="Open chatbot"
       >
-        <MessageCircle className="h-6 w-6" />
+        <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
 
       {/* Chatbot Window */}
@@ -130,7 +130,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 space-y-4 overflow-y-auto p-4 text-foreground">
+          <div className="flex-1 space-y-3 sm:space-y-4 overflow-y-auto p-3 sm:p-4 text-foreground">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -139,31 +139,33 @@ export default function Chatbot() {
                 }`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-lg px-3 py-2 sm:px-4 sm:py-2 ${
                     message.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-secondary border border-border text-foreground"
                   }`}
                 >
                   {message.role === "assistant" ? (
-                    <div className="text-sm prose prose-sm max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-ul:text-foreground prose-li:text-foreground prose-code:text-foreground">
+                    <div className="text-xs sm:text-sm prose prose-sm max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-ul:text-foreground prose-li:text-foreground prose-code:text-foreground">
                       <ReactMarkdown
                         components={{
                           p: ({ children }) => (
-                            <p className="mb-2 last:mb-0">{children}</p>
+                            <p className="mb-1.5 sm:mb-2 last:mb-0">
+                              {children}
+                            </p>
                           ),
                           ul: ({ children }) => (
-                            <ul className="list-disc list-inside mb-2 space-y-1">
+                            <ul className="list-disc list-inside mb-1.5 sm:mb-2 space-y-0.5 sm:space-y-1">
                               {children}
                             </ul>
                           ),
                           ol: ({ children }) => (
-                            <ol className="list-decimal list-inside mb-2 space-y-1">
+                            <ol className="list-decimal list-inside mb-1.5 sm:mb-2 space-y-0.5 sm:space-y-1">
                               {children}
                             </ol>
                           ),
                           li: ({ children }) => (
-                            <li className="text-sm">{children}</li>
+                            <li className="text-xs sm:text-sm">{children}</li>
                           ),
                           strong: ({ children }) => (
                             <strong className="font-semibold">
@@ -174,22 +176,22 @@ export default function Chatbot() {
                             <em className="italic">{children}</em>
                           ),
                           code: ({ children }) => (
-                            <code className="bg-muted px-1 py-0.5 rounded text-xs font-mono">
+                            <code className="bg-muted px-1 py-0.5 rounded text-[10px] sm:text-xs font-mono">
                               {children}
                             </code>
                           ),
                           h1: ({ children }) => (
-                            <h1 className="text-base font-bold mb-2">
+                            <h1 className="text-sm sm:text-base font-bold mb-1.5 sm:mb-2">
                               {children}
                             </h1>
                           ),
                           h2: ({ children }) => (
-                            <h2 className="text-sm font-semibold mb-1.5">
+                            <h2 className="text-xs sm:text-sm font-semibold mb-1 sm:mb-1.5">
                               {children}
                             </h2>
                           ),
                           h3: ({ children }) => (
-                            <h3 className="text-sm font-semibold mb-1">
+                            <h3 className="text-xs sm:text-sm font-semibold mb-0.5 sm:mb-1">
                               {children}
                             </h3>
                           ),
@@ -199,7 +201,7 @@ export default function Chatbot() {
                       </ReactMarkdown>
                     </div>
                   ) : (
-                    <p className="text-sm whitespace-pre-wrap">
+                    <p className="text-xs sm:text-sm whitespace-pre-wrap">
                       {message.content}
                     </p>
                   )}
@@ -208,7 +210,7 @@ export default function Chatbot() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="rounded-lg bg-secondary border border-border text-foreground px-4 py-2">
+                <div className="rounded-lg bg-secondary border border-border text-foreground px-3 py-2 sm:px-4 sm:py-2">
                   <div className="flex items-center gap-1.5">
                     <span className="flex gap-1">
                       <span className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce [animation-delay:0ms] [animation-duration:1.4s]"></span>
@@ -223,7 +225,7 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <div className="border-t p-4">
+          <div className="border-t p-3 sm:p-4">
             <div className="flex gap-2">
               <Input
                 value={input}
@@ -231,14 +233,15 @@ export default function Chatbot() {
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 text-sm sm:text-base"
               />
               <Button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
                 size="icon"
+                className="h-9 w-9 sm:h-10 sm:w-10"
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
             </div>
           </div>
