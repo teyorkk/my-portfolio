@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, X, MessageCircle, Loader2 } from "lucide-react";
+import { Send, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "model";
@@ -142,17 +143,77 @@ export default function Chatbot() {
                       : "bg-secondary border border-border text-foreground"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">
-                    {message.content}
-                  </p>
+                  {message.role === "assistant" ? (
+                    <div className="text-sm prose prose-sm max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-ul:text-foreground prose-li:text-foreground prose-code:text-foreground">
+                      <ReactMarkdown
+                        components={{
+                          p: ({ children }) => (
+                            <p className="mb-2 last:mb-0">{children}</p>
+                          ),
+                          ul: ({ children }) => (
+                            <ul className="list-disc list-inside mb-2 space-y-1">
+                              {children}
+                            </ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol className="list-decimal list-inside mb-2 space-y-1">
+                              {children}
+                            </ol>
+                          ),
+                          li: ({ children }) => (
+                            <li className="text-sm">{children}</li>
+                          ),
+                          strong: ({ children }) => (
+                            <strong className="font-semibold">
+                              {children}
+                            </strong>
+                          ),
+                          em: ({ children }) => (
+                            <em className="italic">{children}</em>
+                          ),
+                          code: ({ children }) => (
+                            <code className="bg-muted px-1 py-0.5 rounded text-xs font-mono">
+                              {children}
+                            </code>
+                          ),
+                          h1: ({ children }) => (
+                            <h1 className="text-base font-bold mb-2">
+                              {children}
+                            </h1>
+                          ),
+                          h2: ({ children }) => (
+                            <h2 className="text-sm font-semibold mb-1.5">
+                              {children}
+                            </h2>
+                          ),
+                          h3: ({ children }) => (
+                            <h3 className="text-sm font-semibold mb-1">
+                              {children}
+                            </h3>
+                          ),
+                        }}
+                      >
+                        {message.content}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <p className="text-sm whitespace-pre-wrap">
+                      {message.content}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="flex items-center gap-2 rounded-lg bg-secondary border border-border text-foreground px-4 py-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <p className="text-sm">Thinking...</p>
+                <div className="rounded-lg bg-secondary border border-border text-foreground px-4 py-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex gap-1">
+                      <span className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce [animation-delay:0ms] [animation-duration:1.4s]"></span>
+                      <span className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce [animation-delay:0.2s] [animation-duration:1.4s]"></span>
+                      <span className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce [animation-delay:0.4s] [animation-duration:1.4s]"></span>
+                    </span>
+                  </div>
                 </div>
               </div>
             )}

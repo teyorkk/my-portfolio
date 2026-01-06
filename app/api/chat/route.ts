@@ -1,5 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
@@ -17,11 +19,190 @@ const SYSTEM_PROMPT = `You are a helpful AI assistant for a web developer's port
 
 1. Help visitors learn about the portfolio owner's skills, projects, and experience
 2. Answer questions about web development, technologies, and the portfolio content
-3. When asked about current events, news, or information that requires up-to-date data, use the search_web function to get the latest information
-4. Be friendly, professional, and concise in your responses
-5. If you need to search for information, always use the search_web function before responding
+3. When asked about portfolio data (projects, skills, certifications, services), use get_portfolio_data function
+4. When asked about project READMEs from the portfolio, use get_project_readme function
+5. When asked about current events, news, or information that requires up-to-date data, use the search_web function
+6. When asked about GitHub repositories, code, or projects on GitHub, use the get_github_repo function
+7. Be friendly, professional, and concise in your responses
 
-Remember to use the search_web function whenever you need current information, news, or data that might change over time.`;
+Available portfolio data:
+- Projects: List of portfolio projects with GitHub links
+- Skills: Frontend, backend, and tools
+- Certifications: Professional certifications
+- Services: Services offered
+
+Use get_portfolio_data to answer questions about the portfolio owner's work, skills, certifications, or services. Use get_project_readme to get README files from projects listed in the portfolio.`;
+
+async function getPortfolioData(dataType: string): Promise<string> {
+  try {
+    const dataDir = join(process.cwd(), "app", "data");
+    let filePath: string;
+    let fileName: string;
+
+    switch (dataType.toLowerCase()) {
+      case "projects":
+        filePath = join(dataDir, "projects.json");
+        fileName = "projects";
+        break;
+      case "skills":
+        filePath = join(dataDir, "skills.json");
+        fileName = "skills";
+        break;
+      case "certifications":
+        filePath = join(dataDir, "certifications.json");
+        fileName = "certifications";
+        break;
+      case "services":
+        filePath = join(dataDir, "services.json");
+        fileName = "services";
+        break;
+      default:
+        return `Unknown data type: ${dataType}. Available types: projects, skills, certifications, services`;
+    }
+
+    const fileContent = await readFile(filePath, "utf-8");
+    const data = JSON.parse(fileContent);
+    return JSON.stringify(data, null, 2);
+  } catch (error) {
+    console.error("Portfolio data error:", error);
+    return `Error reading ${dataType} data: ${
+      error instanceof Error ? error.message : "Unknown error"
+    }`;
+  }
+}
+
+async function getProjectReadme(projectTitle: string): Promise<string> {
+  try {
+    const dataDir = join(process.cwd(), "app", "data");
+    const projectsPath = join(dataDir, "projects.json");
+    const projectsContent = await readFile(projectsPath, "utf-8");
+    const projects = JSON.parse(projectsContent);
+
+    const project = projects.find(
+      (p: any) => p.title.toLowerCase() === projectTitle.toLowerCase()
+    );
+
+    if (!project || !project.link) {
+      return `Project "${projectTitle}" not found in portfolio. Available projects: ${projects
+        .map((p: any) => p.title)
+        .join(", ")}`;
+    }
+
+    const githubUrl = project.link;
+    const match = githubUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+
+    if (!match) {
+      return `Invalid GitHub URL for project "${projectTitle}": ${githubUrl}`;
+    }
+
+    const owner = match[1];
+    const repo = match[2].replace(/\.git$/, "");
+
+    return await getGitHubRepo(owner, repo, "README.md");
+  } catch (error) {
+    console.error("Project README error:", error);
+    return `Error getting README for project "${projectTitle}": ${
+      error instanceof Error ? error.message : "Unknown error"
+    }`;
+  }
+}
+
+async function getGitHubRepo(
+  owner: string,
+  repo: string,
+  path?: string
+): Promise<string> {
+  try {
+    const token = process.env.GITHUB_TOKEN;
+    const headers: HeadersInit = {
+      Accept: "application/vnd.github.v3+json",
+    };
+
+    if (token) {
+      headers.Authorization = `token ${token}`;
+    }
+
+    if (path) {
+      const contentResponse = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+        { headers }
+      );
+
+      if (contentResponse.ok) {
+        const content = await contentResponse.json();
+        if (content.type === "file" && content.encoding === "base64") {
+          const fileContent = Buffer.from(content.content, "base64").toString(
+            "utf-8"
+          );
+          return `File: ${path}\n\n${fileContent}`;
+        } else if (content.type === "dir") {
+          const files = Array.isArray(content) ? content : [content];
+          const fileList = files
+            .map((file: any) => `- ${file.name} (${file.type})`)
+            .join("\n");
+          return `Directory: ${path}\n\nFiles:\n${fileList}`;
+        }
+      }
+    }
+
+    const repoResponse = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}`,
+      {
+        headers,
+      }
+    );
+
+    if (!repoResponse.ok) {
+      if (repoResponse.status === 404) {
+        return `Repository ${owner}/${repo} not found. Please check the repository name and owner.`;
+      }
+      throw new Error(`GitHub API error: ${repoResponse.status}`);
+    }
+
+    const repoData = await repoResponse.json();
+
+    let result = `Repository: ${repoData.full_name}\n`;
+    result += `Description: ${repoData.description || "No description"}\n`;
+    result += `Stars: ${repoData.stargazers_count}\n`;
+    result += `Forks: ${repoData.forks_count}\n`;
+    result += `Language: ${repoData.language || "N/A"}\n`;
+    result += `Created: ${new Date(
+      repoData.created_at
+    ).toLocaleDateString()}\n`;
+    result += `Updated: ${new Date(
+      repoData.updated_at
+    ).toLocaleDateString()}\n`;
+    result += `URL: ${repoData.html_url}\n\n`;
+
+    if (repoData.homepage) {
+      result += `Homepage: ${repoData.homepage}\n`;
+    }
+
+    const readmeResponse = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/readme`,
+      { headers }
+    );
+
+    if (readmeResponse.ok) {
+      const readme = await readmeResponse.json();
+      if (readme.content) {
+        const readmeContent = Buffer.from(readme.content, "base64").toString(
+          "utf-8"
+        );
+        result += `\nREADME:\n${readmeContent}`;
+      }
+    }
+
+    return result;
+  } catch (error) {
+    console.error("GitHub API error:", error);
+    return `I encountered an error accessing the GitHub repository ${owner}/${repo}. ${
+      error instanceof Error
+        ? error.message
+        : "Please check if the repository exists and is accessible."
+    }`;
+  }
+}
 
 async function searchWeb(query: string): Promise<string> {
   try {
@@ -109,6 +290,65 @@ export async function POST(request: NextRequest) {
                 required: ["query"],
               } as any,
             },
+            {
+              name: "get_github_repo",
+              description:
+                "Access GitHub repository information, including repository details, README files, and file contents. Use this when users ask about specific GitHub repositories, want to see code, or need information about a project on GitHub.",
+              parameters: {
+                type: "object",
+                properties: {
+                  owner: {
+                    type: "string",
+                    description:
+                      "The GitHub username or organization that owns the repository (e.g., 'facebook', 'vercel', 'teyorkk').",
+                  },
+                  repo: {
+                    type: "string",
+                    description:
+                      "The name of the repository (e.g., 'react', 'next.js', 'my-portfolio').",
+                  },
+                  path: {
+                    type: "string",
+                    description:
+                      "Optional: Specific file or directory path within the repository (e.g., 'src/index.js', 'README.md', 'package.json'). If not provided, returns repository overview and README.",
+                  },
+                },
+                required: ["owner", "repo"],
+              } as any,
+            },
+            {
+              name: "get_portfolio_data",
+              description:
+                "Access portfolio data files including projects, skills, certifications, and services. Use this when users ask about the portfolio owner's work, skills, certifications, or services offered.",
+              parameters: {
+                type: "object",
+                properties: {
+                  dataType: {
+                    type: "string",
+                    description:
+                      "The type of portfolio data to retrieve. Must be one of: 'projects', 'skills', 'certifications', 'services'.",
+                    enum: ["projects", "skills", "certifications", "services"],
+                  },
+                },
+                required: ["dataType"],
+              } as any,
+            },
+            {
+              name: "get_project_readme",
+              description:
+                "Get the README file from a project listed in the portfolio. Use this when users ask about a specific project's README or want to see project documentation. The project must be listed in the portfolio projects.",
+              parameters: {
+                type: "object",
+                properties: {
+                  projectTitle: {
+                    type: "string",
+                    description:
+                      "The title of the project from the portfolio (e.g., 'IskolarBlock', 'My Portfolio Website', 'Trackify', 'Cineverse', 'SocMedSS', 'CineMood', 'La La Land').",
+                  },
+                },
+                required: ["projectTitle"],
+              } as any,
+            },
           ],
         },
       ],
@@ -148,6 +388,55 @@ export async function POST(request: NextRequest) {
                 },
               },
             };
+          }
+          if (call.name === "get_github_repo") {
+            const owner = call.args?.owner;
+            const repo = call.args?.repo;
+            const path = call.args?.path;
+            if (owner && repo) {
+              const repoInfo = await getGitHubRepo(owner, repo, path);
+              return {
+                functionResponse: {
+                  name: "get_github_repo",
+                  response: {
+                    info: repoInfo,
+                    owner: owner,
+                    repo: repo,
+                    path: path || null,
+                  },
+                },
+              };
+            }
+          }
+          if (call.name === "get_portfolio_data") {
+            const dataType = call.args?.dataType;
+            if (dataType) {
+              const data = await getPortfolioData(dataType);
+              return {
+                functionResponse: {
+                  name: "get_portfolio_data",
+                  response: {
+                    data: data,
+                    dataType: dataType,
+                  },
+                },
+              };
+            }
+          }
+          if (call.name === "get_project_readme") {
+            const projectTitle = call.args?.projectTitle;
+            if (projectTitle) {
+              const readme = await getProjectReadme(projectTitle);
+              return {
+                functionResponse: {
+                  name: "get_project_readme",
+                  response: {
+                    readme: readme,
+                    projectTitle: projectTitle,
+                  },
+                },
+              };
+            }
           }
           return null;
         })
