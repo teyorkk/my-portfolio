@@ -39,13 +39,6 @@
     "image": "/cinemood.png",
     "link": "https://github.com/teyorkk/cinemood",
     "tags": ["Next.js", "n8n", "Tailwind"]
-  },
-  {
-    "title": "La La Land",
-    "description": "An informative Progressive Web App (PWA) for the movie La La Land.",
-    "image": "/lalaland.png",
-    "link": "https://github.com/teyorkk/lalaland",
-    "tags": ["Next.js", "Tailwind"]
   }
  
 ]
