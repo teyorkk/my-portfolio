@@ -20,13 +20,6 @@
     "tags": ["Flutter", "SQLite"]
   },
   {
-    "title": "Cineverse",
-    "description": "A movie review logging website using PHP.",
-    "image": "/cineverse.png",
-    "link": "https://github.com/teyorkk/cineverse",
-    "tags": ["MySQL", "PHP"]
-  },
-  {
     "title": "SocMedSS",
     "description": "A social media app built with Kotlin and Firebase.",
     "image": "/socmedss.png",
