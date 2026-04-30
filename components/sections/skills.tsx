@@ -34,7 +34,7 @@ const iconMap: Record<string, React.ElementType> = {
   SiRedis: SiIcons.SiRedis,
   SiPrisma: SiIcons.SiPrisma,
   SiPnpm: SiIcons.SiPnpm,
-  SiMaven: SiIcons.SiApachemaven,
+  SiApacheMaven: SiIcons.SiApachemaven,
   SiSpringboot: SiIcons.SiSpringboot,
   SiGithubactions: SiIcons.SiGithubactions,
   SiHibernate: SiIcons.SiHibernate,
