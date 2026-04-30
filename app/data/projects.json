@@ -2,14 +2,14 @@
     "title": "IskolarBlock",
     "description": "A blockchain-based scholarship management platform ensuring transparency and efficiency.",
     "image": "/iskolarblock.png",
-    "link": "https://github.com/teyorkk/iskolarblock",
+    "link": "https://iskolarblock.app",
     "tags": ["Next.js", "n8n", "Tailwind", "Supabase", "PostgreSQL"]
   },
   {
     "title": "My Portfolio Website",
     "description": "A modern portfolio built with React and Tailwind CSS.",
     "image": "/portfolio.png",
-    "link": "https://github.com/teyorkk/my-portfolio",
+    "link": "https://www.moises-atienza.dev/",
     "tags": ["React","Next.js", "Tailwind"]
   },
   {
@@ -32,6 +32,12 @@
     "image": "/cinemood.png",
     "link": "https://github.com/teyorkk/cinemood",
     "tags": ["Next.js", "n8n", "Tailwind"]
+  },
+  {
+    "title": "Film Diary",
+    "description": "A movie review website built with springboot, react frontend and deployed in AWS EC2.",
+    "image": "/filmdiary.png",
+    "link": "http://54.252.170.233/",
+    "tags": ["React", "Spring Boot", "Spring Cloud", "PostgreSQL", "Docker", "TMDb"]
   }
- 
 ]

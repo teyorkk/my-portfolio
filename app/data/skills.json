@@ -1,25 +1,37 @@
 {
-  "frontend": [
-    { "name": "HTML", "icon": "FaHtml5", "description": "Semantic markup structure" },
-    { "name": "CSS", "icon": "FaCss3Alt", "description": "Styling and layout design" },
-    { "name": "JavaScript", "icon": "IoLogoJavascript", "description": "Dynamic web interactions" },
+  "languages": [
     { "name": "TypeScript", "icon": "SiTypescript", "description": "Type-safe development" },
-    { "name": "React", "icon": "FaReact", "description": "Component-based UI library" },
-    { "name": "Next.js", "icon": "RiNextjsFill", "description": "React Framework for Web" },
-    { "name": "Tailwind", "icon": "RiTailwindCssFill", "description": "Utility-first CSS framework" }
+    { "name": "HTML", "icon": "FaHtml5", "description": "Semantic markup" },
+    { "name": "CSS", "icon": "FaCss3Alt", "description": "Styling and layout" },
+    { "name": "JavaScript", "icon": "IoLogoJavascript", "description": "Dynamic web interactions" },
+    { "name": "Java", "icon": "FaJava", "description": "General-purpose programming" }
   ],
-  "backend": [
-    { "name": "Next.js", "icon": "RiNextjsFill", "description": "Server-side rendering & API routes" },
-    { "name": "Supabase", "icon": "SiSupabase", "description": "Open source Firebase alternative" },
-    { "name": "PostgreSQL", "icon": "BiLogoPostgresql", "description": "Advanced relational database" },
-    { "name": "MySQL", "icon": "SiMysql", "description": "Open-source relational database" }
+  "framework": [
+    { "name": "NextJS", "icon": "RiNextjsFill", "description": "React framework" },
+    { "name": "React", "icon": "FaReact", "description": "UI library" },
+    { "name": "Spring Boot", "icon": "SiSpringboot", "description": "Java backend framework" },
+    { "name": "TailwindCSS", "icon": "RiTailwindCssFill", "description": "Utility-first CSS" }
   ],
-  "tools": [
+  "database": [
+    { "name": "PostgreSQL", "icon": "BiLogoPostgresql", "description": "Relational DB" },
+    { "name": "MySQL", "icon": "SiMysql", "description": "Relational DB" },
+    { "name": "Redis", "icon": "SiRedis", "description": "In-memory datastore" },
+    { "name": "Supabase", "icon": "SiSupabase", "description": "Hosted Postgres + auth" }
+  ],
+  "tool & platforms": [
+    { "name": "Docker", "icon": "SiDocker", "description": "Containerization" },
     { "name": "Git", "icon": "FaGitAlt", "description": "Version control" },
-    { "name": "GitHub", "icon": "FaGithub", "description": "Code hosting platform" },
-    { "name": "VS Code", "icon": "VscVscode", "description": "Code Editor" },
-    { "name": "Vercel", "icon": "SiVercel", "description": "Deployment Platform" },
-    { "name": "Claude AI", "icon": "SiAnthropic", "description": "AI Assistant" },
-    { "name": "n8n", "icon": "SiN8N", "description": "Workflow Automation" }
+    { "name": "GitHub", "icon": "FaGithub", "description": "Code hosting" },
+    { "name": "GitHub Actions", "icon": "SiGithubactions", "description": "CI/CD workflows" },
+    { "name": "Vercel", "icon": "SiVercel", "description": "Deployment platform" },
+    { "name": "pnpm", "icon": "SiPnpm", "description": "Package manager" },
+    { "name": "Maven", "icon": "SiApacheMaven", "description": "Java build tool" },
+    { "name": "n8n", "icon": "SiN8N", "description": "Workflow automation" },
+    { "name": "Claude", "icon": "SiAnthropic", "description": "AI assistant" },
+    
+    { "name": "Hibernate", "icon": "SiHibernate", "description": "ORM for Java" },
+    { "name": "Prisma", "icon": "SiPrisma", "description": "ORM for Node.js" },
+    { "name": "Flyway", "icon": "SiFlyway", "description": "DB migrations" },
+    { "name": "AWS EC2", "icon": "FaAws", "description": "Cloud virtual servers" }
   ]
 }

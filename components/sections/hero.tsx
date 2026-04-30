@@ -23,7 +23,7 @@ export function Hero() {
         {/* Text on Right Side */}
         <div className="space-y-6 text-center lg:text-left order-2 animate-fade-in-right">
           <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-            Available for Freelance Work
+            Available for Work
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
             Hi, I&apos;m <span className="text-primary">Moises</span>
@@ -32,7 +32,10 @@ export function Hero() {
           </h1>
           <p className="mx-auto lg:mx-0 max-w-[700px] text-muted-foreground text-lg md:text-xl">
             I build accessible, pixel-perfect, performant, and premium web
-            experiences. Specialized in React, Next.js, and Modern UI.
+            experiences. Specialized in 
+            <span className="text-primary"> React</span>, 
+            <span className="text-primary">Next.js</span>, and 
+            <span className="text-primary"> Spring Boot</span>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 md:mb-0">

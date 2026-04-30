@@ -1,15 +1,8 @@
 import skillsData from "@/app/data/skills.json";
 import { Tooltip } from "@/components/ui/tooltip";
-import { FaHtml5, FaCss3Alt, FaReact, FaGitAlt, FaGithub } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaReact, FaGitAlt, FaGithub,FaJava, FaAws, FaTools, FaDatabase } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io5";
-import {
-  SiTypescript,
-  SiSupabase,
-  SiMysql,
-  SiVercel,
-  SiAnthropic,
-  SiN8N,
-} from "react-icons/si";
+import * as SiIcons from "react-icons/si";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { VscVscode } from "react-icons/vsc";
@@ -21,22 +14,35 @@ interface SkillItem {
 }
 
 const iconMap: Record<string, React.ElementType> = {
-  FaHtml5,
-  FaCss3Alt,
-  IoLogoJavascript,
-  SiTypescript,
-  FaReact,
-  RiNextjsFill,
-  RiTailwindCssFill,
-  SiSupabase,
-  BiLogoPostgresql,
-  SiMysql,
-  FaGitAlt,
-  FaGithub,
-  VscVscode,
-  SiVercel,
-  SiAnthropic,
-  SiN8N,
+  FaHtml5: FaHtml5,
+  FaCss3Alt: FaCss3Alt,
+  IoLogoJavascript: IoLogoJavascript,
+  SiTypescript: SiIcons.SiTypescript,
+  FaReact: FaReact,
+  RiNextjsFill: RiNextjsFill,
+  RiTailwindCssFill: RiTailwindCssFill,
+  SiSupabase: SiIcons.SiSupabase,
+  BiLogoPostgresql: BiLogoPostgresql,
+  SiMysql: SiIcons.SiMysql,
+  FaGitAlt: FaGitAlt,
+  FaGithub: FaGithub,
+  VscVscode: VscVscode,
+  SiVercel: SiIcons.SiVercel,
+  SiAnthropic: SiIcons.SiAnthropic,
+  SiN8N: SiIcons.SiN8N,
+  SiDocker: SiIcons.SiDocker,
+  SiRedis: SiIcons.SiRedis,
+  SiPrisma: SiIcons.SiPrisma,
+  SiPnpm: SiIcons.SiPnpm,
+  SiMaven: SiIcons.SiApachemaven,
+  SiSpringboot: SiIcons.SiSpringboot,
+  SiGithubactions: SiIcons.SiGithubactions,
+  SiHibernate: SiIcons.SiHibernate,
+  SiFlyway: SiIcons.SiFlyway,
+  FaJava: FaJava  ,
+  FaAws: FaAws,
+  FaTools: FaTools,
+  FaDatabase: FaDatabase,
 };
 
 export function Skills() {

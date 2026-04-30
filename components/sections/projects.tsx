@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -52,7 +52,7 @@ export function Projects() {
                     asChild
                   >
                     <Link href={project.link || "#"} target="_blank">
-                      <Github className="h-5 w-5" />
+                      <ExternalLink className="h-5 w-5" />
                     </Link>
                   </Button>
                 </div>
