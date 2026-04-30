@@ -17,7 +17,7 @@ export function About() {
 
         <div className="flex justify-center items-center">
           <div className="space-y-6 text-center max-w-3xl">
-            <h3 className="text-2xl font-bold">
+            <h3 className="text-2xl font-bold text-primary">
               Driven by curiosity, fueled by my love with cinema.
             </h3>
             <p className="text-muted-foreground">

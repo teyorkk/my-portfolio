@@ -34,7 +34,7 @@ export function Hero() {
             I build accessible, pixel-perfect, performant, and premium web
             experiences. Specialized in 
             <span className="text-primary"> React</span>, 
-            <span className="text-primary">Next.js</span>, and 
+            <span className="text-primary"> Next.js</span>, and 
             <span className="text-primary"> Spring Boot</span>.
           </p>
 
