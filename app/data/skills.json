@@ -4,7 +4,8 @@
     { "name": "HTML", "icon": "FaHtml5", "description": "Semantic markup" },
     { "name": "CSS", "icon": "FaCss3Alt", "description": "Styling and layout" },
     { "name": "JavaScript", "icon": "IoLogoJavascript", "description": "Dynamic web interactions" },
-    { "name": "Java", "icon": "FaJava", "description": "General-purpose programming" }
+    { "name": "Java", "icon": "FaJava", "description": "General-purpose programming" },
+    { "name": "Go", "icon": "SiGo", "description": "High-performance backend language" }
   ],
   "framework": [
     { "name": "NextJS", "icon": "RiNextjsFill", "description": "React framework" },
@@ -22,12 +23,18 @@
     { "name": "Docker", "icon": "SiDocker", "description": "Containerization" },
     { "name": "Git", "icon": "FaGitAlt", "description": "Version control" },
     { "name": "GitHub", "icon": "FaGithub", "description": "Code hosting" },
-    { "name": "GitHub Actions", "icon": "SiGithubactions", "description": "CI/CD workflows" },
+    { "name": "Actions", "icon": "SiGithubactions", "description": "Github based CI/CD workflows" },
+    { "name": "Jenkins", "icon": "SiJenkins", "description": "CI/CD automation server" },
+    { "name": "SonarQube", "icon": "SiSonarqube", "description": "Code quality & security analysis" },
     { "name": "Vercel", "icon": "SiVercel", "description": "Deployment platform" },
     { "name": "pnpm", "icon": "SiPnpm", "description": "Package manager" },
     { "name": "Maven", "icon": "SiApacheMaven", "description": "Java build tool" },
     { "name": "n8n", "icon": "SiN8N", "description": "Workflow automation" },
     { "name": "Claude", "icon": "SiAnthropic", "description": "AI assistant" },
+    { "name": "Linux Mint", "icon": "SiLinuxmint", "description": "Linux distribution" },
+    { "name": "WSL", "icon": "VscTerminalLinux", "description": "Windows Subsystem for Linux" },
+    { "name": "Neovim", "icon": "SiNeovim", "description": "Vim-based text editor" },
+    { "name": "i3wm", "icon": "SiI3", "description": "Tiling window manager" },
     
     { "name": "Hibernate", "icon": "SiHibernate", "description": "ORM for Java" },
     { "name": "Prisma", "icon": "SiPrisma", "description": "ORM for Node.js" },

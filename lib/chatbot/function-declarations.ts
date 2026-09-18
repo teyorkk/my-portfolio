@@ -47,15 +47,15 @@ export function getFunctionDeclarations() {
     {
       name: "get_portfolio_data",
       description:
-        "Access portfolio data files including projects, skills, certifications, and services. Use this when users ask about the portfolio owner's work, skills, certifications, or services offered.",
+        "Access portfolio data files including experience, projects, skills, and certifications. Use this when users ask about the portfolio owner's work experience, jobs, projects, skills, or certifications.",
       parameters: {
         type: "object",
         properties: {
           dataType: {
             type: "string",
             description:
-              "The type of portfolio data to retrieve. Must be one of: 'projects', 'skills', 'certifications', 'services'.",
-            enum: ["projects", "skills", "certifications", "services"],
+              "The type of portfolio data to retrieve. Must be one of: 'experience', 'projects', 'skills', 'certifications'.",
+            enum: ["experience", "projects", "skills", "certifications"],
           },
         },
         required: ["dataType"],

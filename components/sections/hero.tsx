@@ -22,9 +22,6 @@ export function Hero() {
 
         {/* Text on Right Side */}
         <div className="space-y-6 text-center lg:text-left order-2 animate-fade-in-right">
-          <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-            Available for Work
-          </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
             Hi, I&apos;m <span className="text-primary">Moises</span>
             <br />
@@ -32,19 +29,19 @@ export function Hero() {
           </h1>
           <p className="mx-auto lg:mx-0 max-w-[700px] text-muted-foreground text-lg md:text-xl">
             I build accessible, pixel-perfect, performant, and premium web
-            experiences. Specialized in 
-            <span className="text-primary"> React</span>, 
-            <span className="text-primary"> Next.js</span>, and 
+            experiences. Specialized in
+            <span className="text-primary"> React</span>,
+            <span className="text-primary"> Next.js</span>, and
             <span className="text-primary"> Spring Boot</span>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 md:mb-0">
             <Button
               size="lg"
-              className="rounded-full bg-gradient-to-r from-primary to-green-500 hover:from-primary/90 hover:to-green-500/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
+              className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
               asChild
             >
-              <Link href="#contact">Hire Me</Link>
+              <Link href="#contact">Contact Me</Link>
             </Button>
             <Button
               size="lg"

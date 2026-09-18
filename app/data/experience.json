@@ -1,0 +1,32 @@
+[
+  {
+    "company": "Accenture",
+    "role": "Advanced App Engineering Associate",
+    "period": "August – Present",
+    "type": "Full-time",
+    "location": "Accenture",
+    "current": true,
+    "description": "Currently working as an Advanced App Engineering Associate at Accenture, building and maintaining robust enterprise-grade applications, collaborating with engineering teams, and applying modern software engineering best practices.",
+    "highlights": [
+      "Contributing to enterprise application development and scalable software solutions",
+      "Collaborating with cross-functional engineering teams to implement high-quality features",
+      "Utilizing modern software engineering and application delivery practices"
+    ],
+    "skills": ["Spring Boot", "React", "Software Engineering", "Jenkins", "Docker", "DevOps","wsl"]
+  },
+  {
+    "company": "Accenture",
+    "role": "Full Stack Software Engineer Trainee",
+    "period": "April – July",
+    "type": "Trainee Program",
+    "location": "Accenture Tech AmplifAI Program",
+    "current": false,
+    "description": "Completed the Accenture Tech AmplifAI program as a Full Stack Software Engineer Trainee, undergoing intensive hands-on training and building web applications with Spring Boot and React.",
+    "highlights": [
+      "Participated in the Accenture Tech AmplifAI training program",
+      "Learned and implemented full-stack solutions using Spring Boot for backend and React for frontend",
+      "Developed end-to-end features, RESTful APIs, and responsive user interfaces"
+    ],
+    "skills": ["Spring Boot", "React", "Java", "REST APIs", "Full Stack Development"]
+  }
+]

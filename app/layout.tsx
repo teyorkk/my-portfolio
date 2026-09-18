@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Chatbot from "@/components/chatbot";
+import { LoadingScreen } from "@/components/loading-screen";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <LoadingScreen />
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />

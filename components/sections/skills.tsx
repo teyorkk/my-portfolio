@@ -5,7 +5,7 @@ import { IoLogoJavascript } from "react-icons/io5";
 import * as SiIcons from "react-icons/si";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import { BiLogoPostgresql } from "react-icons/bi";
-import { VscVscode } from "react-icons/vsc";
+import { VscVscode, VscTerminalLinux } from "react-icons/vsc";
 
 interface SkillItem {
   name: string;
@@ -18,6 +18,7 @@ const iconMap: Record<string, React.ElementType> = {
   FaCss3Alt: FaCss3Alt,
   IoLogoJavascript: IoLogoJavascript,
   SiTypescript: SiIcons.SiTypescript,
+  SiGo: SiIcons.SiGo,
   FaReact: FaReact,
   RiNextjsFill: RiNextjsFill,
   RiTailwindCssFill: RiTailwindCssFill,
@@ -40,6 +41,13 @@ const iconMap: Record<string, React.ElementType> = {
   SiHibernate: SiIcons.SiHibernate,
   SiFlyway: SiIcons.SiFlyway,
   FaJava: FaJava  ,
+  SiJenkins: SiIcons.SiJenkins,
+  SiSonarqube: SiIcons.SiSonarqube,
+  SiLinuxmint: SiIcons.SiLinuxmint,
+  VscTerminalLinux: VscTerminalLinux,
+  SiNeovim: SiIcons.SiNeovim,
+  SiLinux: SiIcons.SiLinux,
+  SiI3: SiIcons.SiI3,
   FaAws: FaAws,
   FaTools: FaTools,
   FaDatabase: FaDatabase,

@@ -10,6 +10,9 @@ export async function getPortfolioData(dataType: string): Promise<string> {
     let filePath: string;
 
     switch (dataType.toLowerCase()) {
+      case "experience":
+        filePath = join(DATA_DIR, "experience.json");
+        break;
       case "projects":
         filePath = join(DATA_DIR, "projects.json");
         break;
@@ -19,11 +22,8 @@ export async function getPortfolioData(dataType: string): Promise<string> {
       case "certifications":
         filePath = join(DATA_DIR, "certifications.json");
         break;
-      case "services":
-        filePath = join(DATA_DIR, "services.json");
-        break;
       default:
-        return `Unknown data type: ${dataType}. Available types: projects, skills, certifications, services`;
+        return `Unknown data type: ${dataType}. Available types: experience, projects, skills, certifications`;
     }
 
     const fileContent = await readFile(filePath, "utf-8");
